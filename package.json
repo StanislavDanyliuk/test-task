@@ -1,0 +1,11 @@
+{
+  "name": "test-task",
+  "version": "1.0.0",
+  "description": "test task",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Stanislav Danyliuk",
+  "license": "ISC"
+}
