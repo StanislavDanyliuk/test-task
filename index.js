@@ -76,10 +76,6 @@ function isWeekPassed(date1, date2) {
 
 const calculateCommissionByUser = (data) => {
   const discountarr = [];
-  // const cashOut = data?.filter((tr) => tr?.type == "cashOut");
-  // for (let i = cashOut.length; i > 0; i--) {
-  //   console.log(cashOut[i]);
-  // }
 
   for (let i = 0; i < data?.length; i++) {
     const transaction = data[i];
@@ -106,7 +102,6 @@ const calculateCommissionByUser = (data) => {
         const alreadyGivenDisc = discountarr?.find(
           (tr) => tr?.user_id === user_id && tr?.free1000,
         );
-        // console.log(alreadyGivenDisc, "alreadyGivenDisc");
 
         const giveCom = isWeekPassed(alreadyGivenDisc?.date ?? 0, date);
 
@@ -132,47 +127,7 @@ const calculateCommissionByUser = (data) => {
       }
     }
   }
-  console.log(discountarr);
   return discountarr.map((trr) => trr.commission);
-
-  // const taxes = data.map((transaction) => {
-  //   const {
-  //     type,
-  //     user_type,
-  //     operation: { amount },
-  //   } = transaction;
-  //
-  //   if (type === "cash_in") {
-  //     const commission = (amount * 0.03) / 100;
-  //     return {
-  //       ...transaction,
-  //       commission: (commission >= 5 ? 5 : commission).toFixed(2),
-  //     };
-  //   }
-  //
-  //   if (type === "cash_out") {
-  //     if (user_type === "natural") {
-  //       const isMoreThan1000 = amount > 1000;
-  //       const excessAmount = isMoreThan1000 ? amount - 1000 : amount;
-  //       const commission = (excessAmount * 0.3) / 100;
-  //       return {
-  //         ...transaction,
-  //         free1000: isMoreThan1000,
-  //         commission: commission.toFixed(2),
-  //       };
-  //     } else {
-  //       const commission = (amount * 0.3) / 100;
-  //       return {
-  //         ...transaction,
-  //         commission: (commission >= 0.5 ? commission : 0.5).toFixed(2),
-  //       };
-  //     }
-  //   }
-  //
-  //   return null; // Возвращаем null, если тип транзакции не cash_in и не cash_out
-  // });
-  //
-  // return taxes.filter((tax) => tax !== null); // Убираем null из массива
 };
 
 console.log(calculateCommissionByUser(mockData));
